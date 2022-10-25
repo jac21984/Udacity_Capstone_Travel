@@ -1,0 +1,159 @@
+html{
+	height: 100%;
+	width: 100%;
+}
+
+body{
+    background: #000000;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background-image: url('night_2.jpg');
+    background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	margin-top: 100px;
+}
+
+#app{
+    display:flex;
+	flex-direction: column;
+    height:100%;
+    width: 100%;
+    color: #ffffff;
+    justify-content: center;
+	align-items: center;
+    grid-gap: 30px;
+    font-size: 40px;
+    font-family: 'Oswald', sans-serif;
+    
+}
+
+.holder{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+ 
+#entryHolder{
+    height: 25px;
+	background: rgba(230, 230, 230, 0.5);
+	height: auto;
+	font-size:20px;
+	text-transform: uppercase;
+    width: 220px;
+	word-wrap: break-word;
+	border-bottom: solid 2px #575453;
+}
+
+#zip{
+	background: rgba(230, 230, 230, 0.5);
+}
+
+#feelings{
+	background: rgba(230, 230, 230, 0.5);
+}
+
+.headline {
+    height: 100px;
+    color: #ffffff;
+    font-size: 40px;
+	text-shadow: 6px 6px 6px #000000;
+}
+
+.title{
+    font-size: 27px;
+    font-style: bold;
+    text-shadow: 3px 3px 3px #000000;
+}
+
+label{
+    display:block;
+    font-size: 27px;
+    height: 50px;
+	text-shadow: 3px 3px 3px #000000;
+}
+
+/* style for zip code input */
+input{
+    background: none;
+    border: none;
+    border-bottom: solid 2px #575453;
+    color: #ffffff;
+    font-size: 0.5em;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 220px;
+    box-sizing: border-box;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+/* button style */
+button{
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 15px;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+	box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.75);
+}
+
+/* button animation */
+button:hover{
+    background-position: 100% 0;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+/* no border on items with focus */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+h1{
+    font-size: 36px;
+}
+
+/* style for the feelings area */
+textarea{
+    background: none;
+    border: none;
+    border-bottom: solid 2px #575453;
+    color: #ffffff;
+    font-size: 0.5em;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 220px;
+    box-sizing: border-box;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Style for Placeholder Text */
+::placeholder {
+    color: #ffffff; 
+    font-family: 'Oswald', sans-serif;
+} 

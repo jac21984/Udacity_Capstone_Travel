@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta charset="UTF-8">
+		<title>Weather Journal</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div id = "app">
+			<div class ="holder headline">
+				Weather Journal App
+			</div>
+			<div class ="holder zip">
+				<label for="zip">Enter Zipcode here</label>
+				<input type="text" id="zip" placeholder="zip code" class="userForm">
+			</div>
+			<div class ="holder feel">
+				<label for="feelings">How are you feeling today?</label>
+				<textarea class= "myInput userForm" id="feelings" placeholder="Enter feelings here"></textarea>
+			</div>
+			<button id="generate" type = "submit"> Generate </button>
+			<div class ="holder entry">
+			<div class = "title">Most Recent Entry</div>
+				<div id = "entryHolder">
+					<div id = "date">No Recent Enteries</div> 
+					<div id = "temp"></div>
+					<div id = "content"></div>
+				</div>
+		</div>
+		<script src="app.js" type="text/javascript"></script>
+	</body>
+</html>
