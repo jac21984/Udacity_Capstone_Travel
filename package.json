@@ -1,7 +1,50 @@
 {
+  "name": "udacity-project_5",
+  "version": "1.0.0",
+  "description": "Udacity_Capstone_Travel",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/server/index.js",
+    "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack-dev-server --config webpack.dev.js --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jac21984/Udacity-Project_5.git"
+  },
+  "author": "John Carpenter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jac21984/Udacity-Project_5/issues"
+  },
+  "homepage": "https://github.com/jac21984/Udacity-Project_5#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
-    "express": "^4.18.1"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "babel-jest": "^29.1.2",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.2.0",
+    "dart-sass": "^1.25.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.1.2",
+    "mini-css-extract-plugin": "^2.6.1",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.6",
+    "url-loader": "^4.1.1",
+    "webpack-dev-server": "^4.11.1",
+    "workbox-webpack-plugin": "^6.5.4"
   }
 }

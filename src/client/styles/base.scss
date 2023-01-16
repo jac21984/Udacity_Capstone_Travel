@@ -1,0 +1,56 @@
+$keycolor: rgb(253, 148, 192);
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: center / cover no-repeat url(https://wallpaperaccess.com/full/391984.jpg) fixed;
+}
+
+main {
+    flex: 2;
+    justify-content: center;
+    text-align: center;
+    margin: 2rem;
+    font: 300 1rem "Roboto", sans-serif;
+    background: rgba(238, 234, 234, 0.85);
+}
+
+.p1 {
+    margin: 1rem;
+	color: red;
+}
+
+.p2 {
+	margin: 1rem;
+	color: orange;
+}
+
+section {
+    max-width: 800px;
+    margin: 1rem auto;
+}
+
+a:link,
+a:visited {
+    color: #000;
+    text-decoration: none;
+}
+
+
+a:hover {
+    color: $keycolor;
+}
+
+#earth_div {
+	//top: 0; 
+	//right: 0; 
+	//bottom: 0; 
+	//left: 0; 
+	//position: absolute !important;
+	//color: #ffffff;
+	//position: relative;
+	//overflow: hidden;
+	width:600px;
+	height:400px;
+}
