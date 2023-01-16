@@ -25,17 +25,6 @@ app.use(express.static('dist'));
 const dotenv = require('dotenv');
 dotenv.config();
 
-// Add Access Control Allow Origin headers
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
-
 // Setup Server
 const port = 5000;
 
@@ -50,8 +39,8 @@ app.get('/all', (req, res)=> {
     const geoData = JSON.stringify(projectData);
     //send data
     res.send(geoData);
-    console.log("data from get route");
-    console.log(geoData);
+    //console.log("data from get route");
+    //console.log(geoData);
 })
 
 //Post Route
