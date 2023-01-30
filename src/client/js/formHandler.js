@@ -1,3 +1,6 @@
+const mods = require('./webGlobe')
+var earth = mods.earth
+
 function handleSubmit(event) {
 	event.preventDefault()
 	
@@ -8,6 +11,8 @@ function handleSubmit(event) {
 		
 		const locName = document.getElementById('dest').value;
 		const travelDate = document.getElementById('travelDate').value;
+		//const globe = document.getElementById('earth_div')
+		//console.log("earth 2 is ", mods.earth)
 		//clear fields
 		//document.getElementById('zip').value = "";
 		//document.getElementById('feelings').value = "";
@@ -23,9 +28,10 @@ function handleSubmit(event) {
 				//send data to the server
 				//console.log(data.geonames[0])
 				postGeo('/add', {lng: data.geonames[0].lng, lat: data.geonames[0].lat, countryname: data.geonames[0].countryName})
+				
 			})
 			//update Globe
-			//.then(()=>updateGlobe());
+			.then(()=>updateGlobe());
 			/* //update UI
 			.then(()=>updateUI()); */
 		});
@@ -48,7 +54,6 @@ function handleSubmit(event) {
 		try{
 			//get response 
 			const receivedData = await res.json();
-			//console.log('Returned data: ', receivedData);
 			return JSON.parse(receivedData.contents);
 		}
 		//catch errors
@@ -57,7 +62,7 @@ function handleSubmit(event) {
 		}
 	}
 
-	//api call methods
+//api call methods
 	//get geoUser from server
 	async function getUser(url = '', data = {}) {
 		const res = await fetch(url, {
@@ -70,9 +75,6 @@ function handleSubmit(event) {
 	  });
 	  try{
 			const userData = await res.json();
-			//console.clear();
-			//console.log("geo User");
-			//console.log(userData);
 			return(userData);
 		}
 		catch(error){
@@ -93,8 +95,6 @@ const postGeo = async (url = '', data = {})=>{
 	});
 	try{
 		const returnedData = await res.json();
-		//console.log("data returned");
-		//console.log(returnedData);
 		return(returnedData);
 	}
 	catch(error){
@@ -102,17 +102,20 @@ const postGeo = async (url = '', data = {})=>{
 	}
 }
 
-/* //update the globe
+//update the globe
 const updateGlobe = async ()=> {
 	const req = await fetch('/all');
 	try{
 		const updatedData = await req.json();
-		document.getElementById('earth_div').setView([updatedData.lng, updatedData.lat], 1);
+		console.log("new data", updatedData);
+		//earth.setView([33.44838, -112.0740], 10);
+		//earth.setView([updatedData.lat,updatedData.lng],10);
+		earth.panTo([updatedData.lat,updatedData.lng],3);
 	}
 	catch(error){
 		console.log("error", error);
 	}
-} */
+}
 
 	/* //update the ui
 	const updateUI = async ()=> {

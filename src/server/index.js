@@ -1,5 +1,6 @@
 // Setup empty JS object
 const projectData = {};
+/* var globe = {}; */
 
 // Require Express
 const express = require("express");
@@ -49,7 +50,7 @@ app.post('/add', (req, res)=> {
     projectData.lng = req.body.lng;
     projectData.lat = req.body.lat;
     projectData.countryname = req.body.countryname;
-	console.log("Post Received",projectData);
+	console.log("Post Received", projectData);
 	res.send(projectData);
 })
 
@@ -61,6 +62,12 @@ app.post('/mapKey', (req, res)=> {
 	//console.log(newUrl)
 	res.send(JSON.stringify(newUrl))
 })
+
+/* app.post('/newGlobe', (req, res)=> {
+	globe = req.body.globe;
+	console.log("globe 2 ", globe);
+	res.send(globe)
+}) */
 
 const geoUser = process.env.GEO_NAME_USER
 
