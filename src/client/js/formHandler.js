@@ -1,13 +1,12 @@
 const mods = require('./webGlobe')
 var earth = mods.earth
 
-function handleSubmit(event) {
-	event.preventDefault()
+//event listener on generate button
+//document.getElementById('generate').addEventListener('click', handleSubmit);
+
+async function handleSubmit(event) {
 	
 	console.log('::: Form Submitted :::')
-
-	//event listener on generate button
-	document.getElementById('generate').addEventListener('click', ()=> {
 		
 		const locName = document.getElementById('dest').value;
 		const travelDate = document.getElementById('travelDate').value;
@@ -18,70 +17,75 @@ function handleSubmit(event) {
 		//document.getElementById('feelings').value = "";
 		
 		//api call
-		getUser('/getGeoUser')
-		.then((data) => {
-			//console.log(data); // JSON data parsed by `data.json()` call
-			const geoUser = data;
-			getGeoData(locName, geoUser)
-			//chain promises
-			.then((data)=>{
+		getGeoData(locName)
+		//chain promises
+		.then((geoData)=>{
+			//get boundries
+			getNomBound(geoData.name)
+			.then((nomData)=>{
 				//send data to the server
-				//console.log(data.geonames[0])
-				postGeo('/add', {lng: data.geonames[0].lng, lat: data.geonames[0].lat, countryname: data.geonames[0].countryName})
-				
+				//console.log(nomData)
+				//postGeo('/add', {name: geoData.geonames[0].name, lat: geoData.geonames[0].lat, lng: geoData.geonames[0].lng, countryname: geoData.geonames[0].countryName, bounds: nomData[0].boundingbox, poly: nomData[0].geojson})
+				//update globe position
+				updateGlobe(nomData)
+				//update UI
+				//updateUI()
 			})
-			//update Globe
-			.then(()=>updateGlobe());
-			/* //update UI
-			.then(()=>updateUI()); */
-		});
-	});
+		})
+	//});
+	event.preventDefault();
+}
 
-	//api call method
-	const getGeoData = async (locName, geoUser, data = {}) => {
-		
-		const requestOptions = {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data)
-		};
-		//call the api with the url then wait for response
-		//geoname url 'http://api.geonames.org/searchJSON?q=phoenix&maxRows=10&username=jac21984'
-		//allorigins `https://api.allorigins.win/get?url=${encodeURIComponent(`http://api.geonames.org/searchjson?q=${locName}&maxRows=10&username=${geoUser}`)}`
-		const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`http://api.geonames.org/searchJSON?q=${locName}&maxRows=10&username=${geoUser}`)}`, requestOptions)
-		try{
-			//get response 
-			const receivedData = await res.json();
-			return JSON.parse(receivedData.contents);
-		}
-		//catch errors
-		catch(error){
-			console.log("error",error);
-		}
+//api call method
+const getGeoData = async (locName, data = {}) => {
+	data = {locName: locName}
+	const requestOptions = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data)
+	};
+	//call the api and wait for response
+	const res = await fetch('/geoData', requestOptions)
+	try{
+		//get response 
+		const receivedData = await res.json();
+		//console.log("/geoData res: ", receivedData.geonames[0]);
+		return receivedData.geonames[0];
+		res.end()
 	}
-
-//api call methods
-	//get geoUser from server
-	async function getUser(url = '', data = {}) {
-		const res = await fetch(url, {
-			method : 'POST',
-			credentials : 'same-origin',
-			headers : {
-				'Content-Type': 'application/json',
-			},
-			body : JSON.stringify(data),
-	  });
-	  try{
-			const userData = await res.json();
-			return(userData);
-		}
-		catch(error){
-			console.log("error", error);
-		}
+	//catch errors
+	catch(error){
+		console.log("error",error);
 	}
 }
+	
+//api for getting map boundries from nominatim
+const getNomBound = async (nomName, data = {}) => {
+	const requestOptions = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data)
+	};
+	//call the api with the url then wait for response
+	const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${nomName}&limit=1&format=jsonv2&polygon_geojson=1`, requestOptions)
+	try{
+		//get response 
+		const receivedData = await res.json();
+		//console.log("nom data: ", receivedData); 
+		return receivedData[0] //JSON.parse(receivedData);
+		res.end();
+	}
+	//catch errors
+	catch(error){
+		console.log("error",error);
+	}
+}
+	
+
 
 //send to the server
 const postGeo = async (url = '', data = {})=>{
@@ -96,6 +100,7 @@ const postGeo = async (url = '', data = {})=>{
 	try{
 		const returnedData = await res.json();
 		return(returnedData);
+		res.end()
 	}
 	catch(error){
 		console.log("error", error);
@@ -103,32 +108,26 @@ const postGeo = async (url = '', data = {})=>{
 }
 
 //update the globe
-const updateGlobe = async ()=> {
+function updateGlobe(nomData){
+	console.log(nomData.boundingbox);
+	earth.panInsideBounds(nomData.boundingbox);
+	
+	//*****start here nomination site need exclude teritories
+	//https://nominatim.org/release-docs/develop/api/Overview/
+}
+
+/* //update the ui
+const updateUI = async ()=> {
 	const req = await fetch('/all');
 	try{
 		const updatedData = await req.json();
-		console.log("new data", updatedData);
-		//earth.setView([33.44838, -112.0740], 10);
-		//earth.setView([updatedData.lat,updatedData.lng],10);
-		earth.panTo([updatedData.lat,updatedData.lng],3);
+		document.getElementById('date').textContent = updatedData.date;
+		document.getElementById('temp').textContent = updatedData.temp.name + " - " + updatedData.temp.temp + " °F";
+		document.getElementById('content').textContent = updatedData.feeling;
 	}
 	catch(error){
 		console.log("error", error);
 	}
-}
-
-	/* //update the ui
-	const updateUI = async ()=> {
-		const req = await fetch('/all');
-		try{
-			const updatedData = await req.json();
-			document.getElementById('date').textContent = updatedData.date;
-			document.getElementById('temp').textContent = updatedData.temp.name + " - " + updatedData.temp.temp + " °F";
-			document.getElementById('content').textContent = updatedData.feeling;
-		}
-		catch(error){
-			console.log("error", error);
-		}
-	} */
+} */
 
 export { handleSubmit }
