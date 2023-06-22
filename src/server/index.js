@@ -2,6 +2,7 @@
 const projectData = {};
 const geoData = {};
 const nomData = {};
+const wbData = {};
 
 // Require Express
 const express = require("express");
@@ -72,7 +73,7 @@ app.post('/geoData', (req, res)=> {
 			res.send(body);
 			res.end();
 		} else {
-			console.log("error: ", error)
+			console.log("geo error: ", error)
 			console.log("status code: ", response.statusCode)
 		} 
 	});
@@ -93,7 +94,6 @@ app.post('/add', (req, res)=> {
 	res.end();
 })
 
-
 //send updated map url
 const mapkey = process.env.MAP_KEY
 const globeUrl = process.env.GLOBE_URL
@@ -104,6 +104,104 @@ app.post('/mapKey', (req, res)=> {
 	res.send(JSON.stringify(newUrl))
 	res.end();
 })
+
+//get data from weatherbit
+app.post('/wbData', (req, res)=> {
+	//get location and user
+	wbData.wbLat = req.body.wbLat;
+	wbData.wbLng = req.body.wbLng;
+	wbData.wbDate = req.body.wbDate;
+	wbKey = process.env.WB_KEY_2;
+	
+	const date = new Date();
+	const year = date.getFullYear()
+	const month = String(date.getMonth() + 1).padStart(2, '0')
+	const day = String(date.getDate()).padStart(2, '0')
+	const fulldate = year + "-" + month + "-" + day;
+	
+	/* console.log("Date: ");
+	console.log(wbData.wbDate); */
+	
+	// calc no. of days between two dates
+	var today = new Date();
+	
+    //set two dates
+    var date1 = new Date(today.getTime());
+    var date2 = new Date(wbData.wbDate);
+	
+	/* console.log("Date 1: ")
+	console.log(date1.toString());
+	
+	console.log("Date 2: ")
+	console.log(date2.toString()); */
+      
+    // To calculate the time difference of two dates
+    var diffTime = date2.getTime() - date1.getTime();
+      
+    // To calculate the no. of days between two dates
+    var diffDays = Math.ceil(diffTime / (1000 * 3600 * 24));
+      
+    //To display the final no. of days (result)
+    //console.log("Total number of days between dates " + date1 + " and " + date2 + " is:  "  + diffDays);
+	
+	if (diffDays > 7){
+		//weatherbit example https://api.weatherbit.io/v2.0/current?lat=41.8719&lon=12.5674&key=fd679b7d21f943fea639305b454e1f60&include=minutely
+		wbUrl = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${wbData.wbLat}&lon=${wbData.wbLng}&key=${wbKey}&units=I`;
+	}else{
+		//weatherbit example https://api.weatherbit.io/v2.0/current?lat=41.8719&lon=12.5674&key=fd679b7d21f943fea639305b454e1f60&include=minutely
+		wbUrl = `https://api.weatherbit.io/v2.0/current?lat=${wbData.wbLat}&lon=${wbData.wbLng}&key=${wbKey}&include=minutely&units=I`;
+	}
+
+	//console.log(wbUrl);
+	
+	request(wbUrl, (error, response, body)=> { 
+		if (!error && response.statusCode === 200) { 
+			//console.log(body);
+			res.send(body);
+			res.end();
+		} else {
+			console.log("wberror: ", error)
+			console.log("status code: ", response.statusCode)
+		} 
+	});
+		
+})
+
+//get data from pixabay
+app.post('/pbData', (req, res)=> {
+	//get location and user
+	geoInfo = req.body.geoInfo;
+	pbKey = process.env.PIX_KEY;
+	
+	//console.log(geoInfo);
+	
+	var pbQuery = encodeURIComponent(geoInfo.name);
+	
+	//console.log(pbQuery);
+	
+	//pixabay example https://pixabay.com/api/?key=29514060-59244f1c5b098df6af1c1739a&q=phoenix+arizona&category=travel&image_type=photo&pretty=true&safesearch=true
+	pbUrl = `https://pixabay.com/api/?key=${pbKey}&q=${pbQuery}&category=places&image_type=photo&safesearch=true`;
+
+	//console.log(pbUrl);
+	
+	request(pbUrl, (error, response, body)=> { 
+		if (!error && response.statusCode === 200) { 
+			//console.log(body);
+			res.send(body);
+			res.end();
+		} else {
+			console.log("pberror: ", error)
+			console.log("status code: ", response.statusCode)
+		} 
+	});
+	
+})
+
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
 
 // Setup Server
 const port = 5000;
