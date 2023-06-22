@@ -1,6 +1,6 @@
-![Banner](https://i.giphy.com/media/As5Ibm8Jx7wKoDXTZ7/giphy.webp)
+![Banner](https://i.giphy.com/media/TbSPeUWjSY2ys/giphy.webp)
 
-# Udacity-Weather_Journal_App-Project-3
+# Udacity-Travel_App-Capstone
 
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/jac21984/Udacity-Project_3?include_prereleases)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jac21984/Udacity-Project_3)
