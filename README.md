@@ -37,7 +37,7 @@ Open Index.html file in prefered web browser.
 # Usage
 [(Back to top)](#table-of-contents)
 
-Enter zipcode, enter current feelings and click Generate button.
+Enter locatino, enter travel date and click Search button.
 
 # Development
 [(Back to top)](#table-of-contents)
@@ -52,11 +52,10 @@ No contribututions needed.
 ### Sponsor
 [(Back to top)](#table-of-contents)
 
-Project worked on in correlation with  Udacity.
+Project worked on in correlation with Udacity.
 
 ### Adding new features or fixing bugs
 [(Back to top)](#table-of-contents)
-
 
 # License
 [(Back to top)](#table-of-contents)
@@ -66,6 +65,6 @@ Project worked on in correlation with  Udacity.
 # Footer
 [(Back to top)](#table-of-contents)
 
-This was entertaining.
+So glad this is over.
 
-![Footer](https://c.tenor.com/gHfiGG3DU0QAAAAC/sheldon-big-bang-theory.gif)
+![Footer](https://media.giphy.com/media/3oKIPf3C7HqqYBVcCk/giphy.gif)
