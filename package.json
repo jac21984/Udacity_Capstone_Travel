@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jac21984/Udacity-Project_5.git"
+    "url": "git+https://github.com/jac21984/Udacity_Capstone_Travel.git"
   },
   "author": "John Carpenter",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jac21984/Udacity-Project_5/issues"
+    "url": "https://github.com/jac21984/Udacity_Capstone_Travel/issues"
   },
-  "homepage": "https://github.com/jac21984/Udacity-Project_5#readme",
+  "homepage": "https://github.com/jac21984/Udacity_Capstone_Travel#readme",
   "dependencies": {
     "@mapbox/geojson-area": "^0.2.2",
     "@turf/area": "^6.5.0",
