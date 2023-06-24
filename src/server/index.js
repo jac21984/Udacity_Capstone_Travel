@@ -42,6 +42,10 @@ app.use(express.static('dist'));
 const dotenv = require('dotenv');
 dotenv.config();
 
+app.get('/test', function (req, res) {
+    res.json(mockAPIResponse);
+})
+
 //Get Route
 /* app.get('/all', (req, res)=> {
     //convert data to json
