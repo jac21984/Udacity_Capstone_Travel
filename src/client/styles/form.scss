@@ -1,7 +1,7 @@
 form {
     //border: 1px solid #545454;
     border-radius: 3px;
-    padding: 40px;
+    padding: 0px;
 }
 
 .p1 {
@@ -32,8 +32,8 @@ input {
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	//width:100%;
-	height:35vw;
+	width:auto;
+	height:auto;
 	margin: 2rem;
 	border: 1px solid blue;
 }
@@ -109,7 +109,32 @@ label .respText{
 	
 }
 
+.respImg {
+	height:100%;
+}
+
 #piximg {
-	height: 150px;
+	height: 25vw;
 	width: auto;
+}
+
+@media only screen and (max-device-width: 400px) {
+
+	#results {
+		flex-direction: column;
+	}
+	
+	#weathIcon {
+		height: 25px;
+	}
+	
+	#earth_div {
+		width: 65vw;
+		height: auto;
+	}
+	
+	#resultsText {
+		width:80%;
+	}
+
 }

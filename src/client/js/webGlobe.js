@@ -1,5 +1,5 @@
 export var options = {color: '#8080FF', opacity: 1, fillColor: '#8080FF', fillOpacity: 0.3, weight: 2};
-export var earth = new WE.map('earth_div',{dragging: true, tilting: false, zooming: true});
+export var earth = new WE.map('earth_div',{dragging: false, tilting: false, zooming: false});
 export var marker = WE.marker([33.44838, -112.0740]);
 export var poly;
 
