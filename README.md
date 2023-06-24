@@ -12,7 +12,7 @@ Project for Udacity. Using web API and Asynchronous Applications.
 
 # Demo-Preview
 
-![Random GIF](https://raw.githubusercontent.com/jac21984/Udacity-Project_3/main/preview.gif?token=GHSAT0AAAAAABWCB2H3BTC3WJYHIECWXKZAYV2XXXQ)
+![Random GIF](https://raw.githubusercontent.com/jac21984/Udacity_Capstone_Travel/main/preview.gif?token=GHSAT0AAAAAACEHO5FRHJXGTW4FP56DGUN2ZEWQUOA)
 
 # Table of contents
 
