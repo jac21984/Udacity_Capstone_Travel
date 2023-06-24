@@ -2,11 +2,11 @@
 
 # Udacity-Travel_App-Capstone
 
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/jac21984/Udacity-Project_3?include_prereleases)
-![GitHub last commit](https://img.shields.io/github/last-commit/jac21984/Udacity-Project_3)
-![GitHub issues](https://img.shields.io/github/issues-raw/jac21984/Udacity-Project_3)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/jac21984/Udacity-Project_3)
-![GitHub liscence](https://img.shields.io/github/license/jac21984/Udacity-Project_3)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/jac21984/Udacity_Capstone_Travel?include_prereleases)
+![GitHub last commit](https://img.shields.io/github/last-commit/jac21984/Udacity_Capstone_Travel)
+![GitHub issues](https://img.shields.io/github/issues-raw/jac21984/Udacity_Capstone_Travel)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/jac21984/Udacity_Capstone_Travel)
+![GitHub liscence](https://img.shields.io/github/license/jac21984/Udacity_Capstone_Travel)
 
 Project for Udacity. Using web API and Asynchronous Applications.
 
