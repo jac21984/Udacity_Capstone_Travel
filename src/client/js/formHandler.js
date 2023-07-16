@@ -1,9 +1,7 @@
-const mods = require('./webGlobe')
-
-var earth = mods.earth
-var marker = mods.marker
-var poly = mods.poly
-var options = mods.options
+var options;
+var earth;
+var marker;
+var poly;
 
 var geoLat = 0;
 var geoLon = 0;
@@ -14,28 +12,55 @@ var snowOut = 0;
 var weatherOut = "";
 var iconOut = "https://cdn-icons-png.flaticon.com/512/214/214025.png";
 var picOut = "https://cdn.pixabay.com/photo/2012/04/02/13/33/globe-24502_1280.png";
-
-
-/* var tHelpers = require('@turf/helpers');
-var tArea = require('@turf/area');
-var tCOM = require('@turf/center-of-mass'); */
-
-/* import polygon from '@turf/helpers';
-import area from '@turf/area';
-import centerOfMass from '@turf/center-of-mass'; */
-
 var helpers = require('@turf/helpers');
 var invariant = require('@turf/invariant');
+
 import area from '@turf/area';
 import envelope from '@turf/envelope';
 import centerOfMass from '@turf/center-of-mass'
 import flip from '@turf/flip';
 import flatten from '@turf/flatten';
-import unkinkPolygon from '@turf/unkink-polygon'
-import union from '@turf/union'
 import cleanCoords from '@turf/clean-coords'
 
  
+//initialize webgl earth module
+function initialize() {
+	
+	getKey('/mapKey')
+	.then((data) => {
+		//webGL Earth
+		options = {color: '#8080FF', opacity: 1, fillColor: '#8080FF', fillOpacity: 0.3, weight: 2};
+		earth = new WE.map('earth_div',{dragging: false, tilting: false, zooming: false});
+		earth.setView([33.44838, -112.0740], 1.75);
+		WE.tileLayer(data,{
+			attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>'
+		}).addTo(earth);
+		poly = null;
+		marker = WE.marker([33.44838, -112.0740]);
+	});
+	 
+}
+
+async function getKey(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+export { initialize }
+
 //event listener on generate button
 //document.getElementById('generate').addEventListener('click', handleSubmit);
 
@@ -225,7 +250,12 @@ function updateGlobe(nomData){
 	//console.log(polycoords);
 	
 	removePoly();
-	poly = WE.polygon(polycoords, options).addTo(earth);
+	console.log(Array.isArray(polycoords));
+	if (Array.isArray(polycoords)){
+		poly = WE.polygon(polycoords, options).addTo(earth);
+	}else{
+		
+	};
 }
 
 function removePoly() {

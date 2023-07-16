@@ -1,5 +1,4 @@
-import { initialize } from './js/webGlobe'
-import { handleSubmit } from './js/formHandler'
+import { initialize, handleSubmit } from './js/formHandler'
 
 import './styles/resets.scss'
 import './styles/base.scss'
